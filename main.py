@@ -34,10 +34,7 @@ def selectImages():
         plt.colorbar()
         fileName = fileName[:-3]
         plt.savefig(fileName+'png')
-
         plt.show()
-        fileName = fileName[:-3]
-        plt.savefig(fileName+'png')
 
     text0.insert(INSERT, 'Готово')
 
