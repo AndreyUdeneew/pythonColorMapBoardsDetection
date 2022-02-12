@@ -1,3 +1,4 @@
+
 # This is a sample Python script.
 import re
 import struct
@@ -8,8 +9,8 @@ from tkinter import filedialog
 from tkinter.filedialog import *
 import os
 import sys
-# from PIL import Image
-
+import cv2
+import matplotlib.pyplot as plt
 
 # outputFile = "C:/Users/Stasy/Desktop/output2FLASH.txt"
 
@@ -22,18 +23,22 @@ def selectImages():
     fileNames = askopenfilenames(parent=window)
     fileNames = sorted(fileNames)
     for fileName in fileNames:
-        with open(fileName, mode='rb') as f:
-            header = [header_byte for header_byte in f.read(118)]
-            f.seek(118)
-            data_bytes = [255-byte for byte in f.read()]
-            fOut.write(bytes(data_bytes))
         print(fileName)
+        img = cv2.imread(fileName, cv2.IMREAD_GRAYSCALE)
+        #####################################################
+        # cv2.imshow("Image", img)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
+        ######################################################
+        plt.imshow(img)
+        plt.colorbar()
+        fileName = fileName[:-3]
+        plt.savefig(fileName+'png')
 
-    add = '0xff'
-    add = int(add, base=16)
-    for i in range((MAX_N_of_Fullscreens-len(fileNames))*int(fullscreen_length)):
-        fOut.write(int.to_bytes(add, 1, byteorder='big'))
-    fOut.close()
+        plt.show()
+        fileName = fileName[:-3]
+        plt.savefig(fileName+'png')
+
     text0.insert(INSERT, 'Готово')
 
 # Press the green button in the gutter to run the script.
@@ -57,3 +62,4 @@ if __name__ == '__main__':
     print_hi('PyCharm')
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
