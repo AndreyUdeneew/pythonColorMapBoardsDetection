@@ -7,6 +7,8 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter.filedialog import *
 import os
+import sys
+# from PIL import Image
 
 
 # outputFile = "C:/Users/Stasy/Desktop/output2FLASH.txt"
@@ -16,10 +18,9 @@ def print_hi(name):
     print(f'Bye, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
 def selectImages():
-    outputFile = format(text3.get("1.0", 'end-1c'))
+    outputFile = format(text0.get("1.0", 'end-1c'))
     fileNames = askopenfilenames(parent=window)
     fileNames = sorted(fileNames)
-    fOut = open(outputFile, 'wb')
     for fileName in fileNames:
         with open(fileName, mode='rb') as f:
             header = [header_byte for header_byte in f.read(118)]
