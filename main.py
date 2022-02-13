@@ -10,7 +10,9 @@ from tkinter.filedialog import *
 import os
 import sys
 import cv2
+import numpy as np
 import matplotlib.pyplot as plt
+# from PIL import Image
 
 # outputFile = "C:/Users/Stasy/Desktop/output2FLASH.txt"
 
@@ -25,17 +27,20 @@ def selectImages():
     for fileName in fileNames:
         print(fileName)
         img = cv2.imread(fileName, cv2.IMREAD_GRAYSCALE)
+        image_eq = cv2.equalizeHist(img)
         #####################################################
         # cv2.imshow("Image", img)
         # cv2.waitKey(0)
         # cv2.destroyAllWindows()
         ######################################################
-        plt.imshow(img)
+        # plt.imshow(img, clim = (np.max(img)*0.01, np.max(img)*0.99))
+        # plt.imshow(img, clim=(25, 125))
+        # plt.imshow(img)
+        plt.imshow(image_eq)
         plt.colorbar()
         fileName = fileName[:-3]
         plt.savefig(fileName+'png')
         plt.show()
-
     text0.insert(INSERT, 'Готово')
 
 # Press the green button in the gutter to run the script.
